@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import Jone from "../../assets/images/jone.jpg";
+import Jone from "../assets/images/jone.jpg";
 
 export const AuthContext = createContext()
 
@@ -7,7 +7,7 @@ export const AuthContextProvider = ({children}) => {
 
    
     const [currentUser, setCurrentUser] = useState(
-        JSON.parse(localStorage.getItem("user")) || false
+        JSON.parse(localStorage.getItem("user")) || null
     );
 
     const login = () => {
@@ -18,7 +18,9 @@ export const AuthContextProvider = ({children}) => {
     useEffect(() => {
       localStorage.setItem("user", JSON.stringify(currentUser))
     },[currentUser])
-
+//  useEffect(() => {
+//   login();
+// }, []);
     return (
     <AuthContext.Provider value={{ currentUser, login }}>
     {children}
